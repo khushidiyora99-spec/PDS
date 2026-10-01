@@ -1,0 +1,88 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load real-world Iris dataset
+df = sns.load_dataset("iris")
+
+# Display first 5 records
+print("First 5 Records:")
+print(df.head())
+
+# Dataset information
+print("\nDataset Information:")
+print(df.info())
+
+# Statistical summary
+print("\nStatistical Summary:")
+print(df.describe())
+
+# Check missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+
+# ------------------------------------------------
+# UNIVARIATE ANALYSIS
+# ------------------------------------------------
+
+print("\nMean of Numerical Features:")
+print(df.select_dtypes(include="number").mean())
+
+# Histogram of Sepal Length
+plt.figure(figsize=(6, 4))
+plt.hist(df["sepal_length"], bins=10)
+plt.title("Univariate Analysis - Sepal Length")
+plt.xlabel("Sepal Length")
+plt.ylabel("Frequency")
+plt.show()
+
+# Boxplot
+plt.figure(figsize=(6, 4))
+sns.boxplot(y=df["sepal_length"])
+plt.title("Boxplot of Sepal Length")
+plt.show()
+
+
+# ------------------------------------------------
+# BIVARIATE ANALYSIS
+# ------------------------------------------------
+
+# Scatter plot: Sepal Length vs Sepal Width
+plt.figure(figsize=(7, 5))
+sns.scatterplot(
+    data=df,
+    x="sepal_length",
+    y="sepal_width",
+    hue="species"
+)
+plt.title("Bivariate Analysis")
+plt.xlabel("Sepal Length")
+plt.ylabel("Sepal Width")
+plt.show()
+
+# Correlation between two variables
+print("\nCorrelation:")
+print(df["sepal_length"].corr(df["sepal_width"]))
+
+
+# ------------------------------------------------
+# MULTIVARIATE ANALYSIS
+# ------------------------------------------------
+
+# Pair plot of all numerical features
+sns.pairplot(df, hue="species")
+plt.show()
+
+# Correlation matrix
+plt.figure(figsize=(7, 5))
+correlation = df.select_dtypes(include="number").corr()
+
+sns.heatmap(
+    correlation,
+    annot=True,
+    cmap="coolwarm"
+)
+
+plt.title("Multivariate Correlation Analysis")
+plt.show()
