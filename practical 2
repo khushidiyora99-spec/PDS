@@ -1,0 +1,100 @@
+# 2. List
+
+print("--- LIST ---")
+
+numbers = [10, 20, 30, 40]
+
+print("Original List:", numbers)
+
+numbers.append(50)
+print("After append:", numbers)
+
+numbers.insert(1, 15)
+print("After insert:", numbers)
+
+numbers.remove(30)
+print("After remove:", numbers)
+
+numbers.pop()
+print("After pop:", numbers)
+
+numbers.sort()
+print("After sort:", numbers)
+
+numbers.reverse()
+print("After reverse:", numbers)
+
+
+# Tuple
+print("\n--- TUPLE ---")
+
+t = (10, 20, 30, 20, 40)
+
+print("Tuple:", t)
+print("Count of 20:", t.count(20))
+print("Index of 30:", t.index(30))
+print("Length:", len(t))
+
+
+# Set
+print("\n--- SET ---")
+
+s = {10, 20, 30}
+
+print("Set:", s)
+
+s.add(40)
+print("After add:", s)
+
+s.remove(20)
+print("After remove:", s)
+
+s.update([50, 60])
+print("After update:", s)
+
+s.discard(100)
+print("After discard:", s)
+
+
+# Dictionary
+print("\n--- DICTIONARY ---")
+
+student = {
+    "name": "Khushi",
+    "age": 18,
+    "course": "Computer Engineering"
+}
+
+print("Dictionary:", student)
+
+print("Name:", student["name"])
+
+student["age"] = 19
+print("After updating age:", student)
+
+student["city"] = "Surat"
+print("After adding city:", student)
+
+student.pop("age")
+print("After deleting age:", student)
+
+print("Keys:", student.keys())
+print("Values:", student.values())
+print("Items:", student.items())
+
+
+# String
+print("\n--- STRING ---")
+
+text = "Python Programming"
+
+print("String:", text)
+print("Upper:", text.upper())
+print("Lower:", text.lower())
+print("Title:", text.title())
+print("Length:", len(text))
+print("Replace:", text.replace("Python", "Java"))
+print("Find:", text.find("Programming"))
+print("Count:", text.count("m"))
+print("Starts with Python:", text.startswith("Python"))
+print("Ends with Programming:", text.endswith("Programming"))
