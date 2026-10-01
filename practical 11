@@ -1,0 +1,86 @@
+import pandas as pd
+
+# ------------------------------------------------
+# 1. Create a Pandas Series
+# ------------------------------------------------
+
+marks = pd.Series([85, 72, 90, 65, 78])
+
+print("Pandas Series:")
+print(marks)
+
+
+# ------------------------------------------------
+# 2. Create a DataFrame
+# ------------------------------------------------
+
+data = {
+    "Name": ["Khushi", "Diyora", "Amit", "Riya", "Rahul"],
+    "Department": ["CE", "CE", "IT", "IT", "CE"],
+    "Marks": [85, 72, 90, 65, 78],
+    "Age": [20, 21, 20, 22, 21]
+}
+
+df = pd.DataFrame(data)
+
+print("\nDataFrame:")
+print(df)
+
+
+# ------------------------------------------------
+# 3. Data Selection
+# ------------------------------------------------
+
+print("\nSelect Marks column:")
+print(df["Marks"])
+
+print("\nSelect Name and Marks:")
+print(df[["Name", "Marks"]])
+
+print("\nSelect first 3 rows:")
+print(df.iloc[:3])
+
+
+# ------------------------------------------------
+# 4. Data Filtering
+# ------------------------------------------------
+
+print("\nStudents having marks greater than 75:")
+print(df[df["Marks"] > 75])
+
+print("\nStudents from CE department:")
+print(df[df["Department"] == "CE"])
+
+
+# ------------------------------------------------
+# 5. Grouping
+# ------------------------------------------------
+
+print("\nGroup by Department:")
+grouped = df.groupby("Department")
+
+print(grouped["Marks"].mean())
+
+
+# ------------------------------------------------
+# 6. Aggregation
+# ------------------------------------------------
+
+print("\nAggregation by Department:")
+
+result = df.groupby("Department")["Marks"].agg(
+    ["sum", "mean", "min", "max", "count"]
+)
+
+print(result)
+
+
+# ------------------------------------------------
+# 7. Multiple Aggregations
+# ------------------------------------------------
+
+print("\nMultiple Aggregation:")
+print(df.groupby("Department").agg({
+    "Marks": ["mean", "max", "min"],
+    "Age": ["mean", "max"]
+}))
