@@ -1,0 +1,88 @@
+import numpy as np
+from scipy import stats
+
+# Dataset
+data = np.array([10, 12, 12, 15, 18, 20, 20, 20, 25, 30])
+
+print("Dataset:")
+print(data)
+
+# ------------------------------------------------
+# 1. Statistical Measures
+# ------------------------------------------------
+
+# Mean
+print("\nMean =", stats.tmean(data))
+
+# Median
+print("Median =", np.median(data))
+
+# Mode
+mode_result = stats.mode(data, keepdims=True)
+print("Mode =", mode_result.mode[0])
+
+# Variance
+print("Variance =", np.var(data))
+
+# Standard Deviation
+print("Standard Deviation =", np.std(data))
+
+# Minimum and Maximum
+print("Minimum =", np.min(data))
+print("Maximum =", np.max(data))
+
+# Range
+print("Range =", np.ptp(data))
+
+# Skewness
+print("Skewness =", stats.skew(data))
+
+# Kurtosis
+print("Kurtosis =", stats.kurtosis(data))
+
+
+# ------------------------------------------------
+# 2. One-Sample t-test
+# ------------------------------------------------
+
+# Test whether the mean is significantly different from 18
+t_stat, p_value = stats.ttest_1samp(data, 18)
+
+print("\nOne-Sample t-test:")
+print("t-statistic =", t_stat)
+print("p-value =", p_value)
+
+if p_value < 0.05:
+    print("Reject H0: Significant difference exists.")
+else:
+    print("Fail to reject H0: No significant difference.")
+
+
+# ------------------------------------------------
+# 3. Normality Test
+# ------------------------------------------------
+
+stat, p = stats.shapiro(data)
+
+print("\nShapiro-Wilk Normality Test:")
+print("Statistic =", stat)
+print("p-value =", p)
+
+if p < 0.05:
+    print("Data is not normally distributed.")
+else:
+    print("Data is approximately normally distributed.")
+
+
+# ------------------------------------------------
+# 4. Correlation Test
+# ------------------------------------------------
+
+x = [10, 20, 30, 40, 50]
+y = [12, 25, 28, 42, 48]
+
+correlation, p_value = stats.pearsonr(x, y)
+
+print("\nPearson Correlation Test:")
+print("Correlation =", correlation)
+print("p-value =", p_value)
