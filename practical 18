@@ -1,0 +1,52 @@
+import pandas as pd
+import numpy as np
+
+# Create dataset
+data = {
+    'Name': ['Amit', 'Riya', 'Rahul', 'Amit', 'Neha', 'Karan'],
+    'Age': [20, 21, np.nan, 20, 22, 100],
+    'Marks': [85, 90, 78, 85, np.nan, 95]
+}
+
+df = pd.DataFrame(data)
+
+print("Original Dataset:")
+print(df)
+
+# 1. Detect missing values
+print("\nMissing Values:")
+print(df.isnull().sum())
+
+# 2. Handle missing values
+df['Age'] = df['Age'].fillna(df['Age'].mean())
+df['Marks'] = df['Marks'].fillna(df['Marks'].mean())
+
+print("\nAfter Handling Missing Values:")
+print(df)
+
+# 3. Remove duplicate records
+df = df.drop_duplicates()
+
+print("\nAfter Removing Duplicates:")
+print(df)
+
+# 4. Detect outliers using IQR
+Q1 = df['Age'].quantile(0.25)
+Q3 = df['Age'].quantile(0.75)
+IQR = Q3 - Q1
+
+lower = Q1 - 1.5 * IQR
+upper = Q3 + 1.5 * IQR
+
+print("\nLower Limit:", lower)
+print("Upper Limit:", upper)
+
+# Treat outliers by replacing them with median
+median_age = df['Age'].median()
+
+df['Age'] = df['Age'].apply(
+    lambda x: median_age if x < lower or x > upper else x
+)
+
+print("\nAfter Treating Outliers:")
+print(df)
