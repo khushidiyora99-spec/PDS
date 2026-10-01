@@ -1,0 +1,96 @@
+import mysql.connector
+
+# Connect to MySQL
+con = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="1234",
+    database="college"
+)
+
+cursor = con.cursor()
+
+print("MySQL Connected Successfully!")
+
+
+# ---------------- CREATE ----------------
+
+# Create table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS students (
+    id INT PRIMARY KEY,
+    name VARCHAR(50),
+    marks INT
+)
+""")
+
+con.commit()
+
+print("Table created successfully.")
+
+
+# Insert record
+sql = "INSERT INTO students (id, name, marks) VALUES (%s, %s, %s)"
+values = (1, "Khushi", 85)
+
+cursor.execute(sql, values)
+con.commit()
+
+print("Record inserted successfully.")
+
+
+# ---------------- READ ----------------
+
+cursor.execute("SELECT * FROM students")
+
+print("\nStudent Records:")
+
+for row in cursor.fetchall():
+    print(row)
+
+
+# ---------------- UPDATE ----------------
+
+sql = "UPDATE students SET marks = %s WHERE id = %s"
+values = (95, 1)
+
+cursor.execute(sql, values)
+con.commit()
+
+print("\nRecord updated successfully.")
+
+
+# Display updated record
+cursor.execute("SELECT * FROM students")
+
+print("\nAfter Update:")
+
+for row in cursor.fetchall():
+    print(row)
+
+
+# ---------------- DELETE ----------------
+
+sql = "DELETE FROM students WHERE id = %s"
+values = (1,)
+
+cursor.execute(sql, values)
+con.commit()
+
+print("\nRecord deleted successfully.")
+
+
+# Display final records
+cursor.execute("SELECT * FROM students")
+
+print("\nFinal Records:")
+
+for row in cursor.fetchall():
+    print(row)
+
+
+# Close connection
+cursor.close()
+con.close()
+
+print("\nMySQL connection closed.")
